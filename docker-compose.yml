@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+  speech-to-text-API:
+    image: node:20
+    working_dir: /app
+    command: bash -c "yarn && yarn run dev"
+    volumes:
+      - .:/app:z
+    container_name: speech-to-text-API
+    ports:
+      - "3000:3000"
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: "key.json" # Create your actual API key.json
+      DB_HOST: mongo:27017
+      DB_NAME: transcripts
+      DB_COLLECTION: transcripts_data
+      DB_ROOT_USERNAME: root
+      DB_ROOT_PASSWORD: example
+      LANGUAGE_CODE: en-US
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - speech-data:/data/db
+    container_name: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: transcripts
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    container_name: mongo-express
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+      ME_CONFIG_BASICAUTH: ""
+
+volumes:
+  speech-data:
