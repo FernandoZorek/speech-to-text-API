@@ -11,19 +11,10 @@
 
 ## Features
 
-- Folder Monitoring:
- - The Chokidar library is used to monitor the "files" folder for new additions.
- - When a new MP3 file is detected, the system triggers an event.
-
-- Speech-to-Text Conversion:
- - The Google Cloud Speech-to-Text API is used to convert the content of the MP3 file to text.
- - The converted text is stored in a variable.
-
-- Database Storage:
- - The converted text and relevant information from the MP3 file (name, creation date, etc.) are saved to the MongoDB database.
-
-- Move File to Processed Folder:
- - After conversion and storage, the original MP3 file is moved to the "files-processed" folder.
+- *Folder Monitoring*: The Chokidar library is used to monitor the "files" folder for new additions. When a new MP3 file is detected, the system triggers an event.
+- *Speech-to-Text Conversion*: The Google Cloud Speech-to-Text API is used to convert the content of the MP3 file to text. The converted text is stored in a variable.
+- *Database Storage*: The converted text and relevant information from the MP3 file (name, creation date, etc.) are saved to the MongoDB database.
+- *Move File to Processed Folder*: After conversion and storage, the original MP3 file is moved to the "files-processed" folder.
 
 ## Tech
 
